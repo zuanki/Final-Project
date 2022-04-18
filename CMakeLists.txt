@@ -6,7 +6,7 @@ include_directories(include)
 
 ##################################
 find_package(SDL2 REQUIRED)
-include_directories(main ${SDL2_INCLUDE_DIRS})
+include_directories(${SDL2_INCLUDE_DIRS})
 
 # set(SOURCES src/a.cpp src/b.cpp)
 
