@@ -1,16 +1,42 @@
-#include <iostream>
-#include <SDL.h>
-#include "struct.hpp"
+#include "game.hpp"
+Game *game = NULL;
 
+int main( int argc, char* args[] ){
+	const int FPS = 60;
+	const int frameDelay = 1000/FPS;
+	Uint32 frameStart;
+	int frameTime;
 
+	game = new Game();
+	if(!game->init())
+	{
+		std::cout << "Failed to init window" << std::endl;
+	}
+	else
+	{
+		if(!game->loadMedia())
+		{
+			std::cout << "Failed to load Media" << std::endl;
+		}
+		else
+		{
+			while (game->getGameState())
+			{
+				frameStart = SDL_GetTicks();
 
-int main(int argc, char* argv[]){
-    App newapp;
-    newapp.window = SDL_CreateWindow("Hello", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 500, 500, SDL_WINDOW_SHOWN);
-    newapp.renderer = SDL_CreateRenderer(newapp.window, -1, 1);
-    SDL_SetRenderDrawColor(newapp.renderer, 200, 100, 100, 0);
-    SDL_RenderDrawLine(newapp.renderer, 0,0,500,500);
-    SDL_RenderPresent(newapp.renderer);
-    SDL_Delay(5000);
-    return 0;
+				game->handleEvents();
+				game->update();
+				game->render();
+
+				frameTime = SDL_GetTicks() - frameStart;
+
+				if(frameDelay > frameTime){
+					SDL_Delay(frameDelay - frameTime );
+				}
+			}
+		}
+
+	}
+	game->close();
+	return 0;
 }
