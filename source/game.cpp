@@ -118,5 +118,5 @@ void Game::close(){
 
 	//Quit SDL subsystems
 	SDL_Quit();
-	std::cout << "Game clear";
+	std::cout << "Game clear"<<std::endl;
 }
