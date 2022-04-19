@@ -1,6 +1,12 @@
 #include "game.hpp"
 #include "defs.hpp"
+#include "player.hpp"
+#include "map.hpp"
 SDL_Renderer* Game::gRenderer = NULL;
+
+Player hero;
+Map new_map;
+int frame = 0;
 
 Game::Game(){}
 Game::~Game(){}
@@ -24,7 +30,7 @@ bool Game::init(){
 		}
 
 		//Create window
-		gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		gWindow = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		if( gWindow == NULL )
 		{
 			printf( "Window could not be created! %s\n", SDL_GetError() );
@@ -69,6 +75,12 @@ bool Game::loadMedia(){
 
 	bool success = true;
 	SDL_Color textColor = {0, 0, 0, 255};
+	if (!hero.loadImagePlayer("../images/hero.png")){
+		success = false;
+	}
+	if(!new_map.loadMap()){
+		success = false;
+	}
 	return success;
 
 }
@@ -89,13 +101,18 @@ void Game::handleEvents(){
 		}
 		else
 		{
-		//
-
+		hero.handleMovePlayer(e);
 		}
 	}
 }
 void Game::update(){
+	++frame;
 
+    //Cycle animation
+    if( frame / 4 >= 4 )
+    {
+        frame = 0;
+    }
 }
 
 void Game::render(){
@@ -103,6 +120,9 @@ void Game::render(){
 	SDL_SetRenderDrawColor( gRenderer, 255, 255, 255, 255 );
 	SDL_RenderClear( gRenderer );
 	//Update Screen
+	new_map.showMap();
+	
+	hero.showImagePlayer();
 	SDL_RenderPresent( gRenderer );
 	//Update frames
 
@@ -115,7 +135,6 @@ void Game::close(){
 	SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
 	gRenderer = NULL;
-
 	//Quit SDL subsystems
 	SDL_Quit();
 	std::cout << "Game clear"<<std::endl;
