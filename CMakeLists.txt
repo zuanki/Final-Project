@@ -70,7 +70,7 @@ set(SDL2IMAGE_FOUND ${SDL2_IMAGE_FOUND})
 
 INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIR})
 
-set(SOURCES source/main.cpp source/game.cpp)
+set(SOURCES source/main.cpp source/game.cpp source/texture.cpp)
 
 #file(GLOB SOURCES "source/*.cpp")
 
