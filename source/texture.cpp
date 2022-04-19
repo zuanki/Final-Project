@@ -113,8 +113,8 @@ void LTexture::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* ce
 	//Set clip rendering dimensions
 	if( clip != NULL )
 	{
-		renderQuad.w = clip->w*2;
-		renderQuad.h = clip->h*2;
+		renderQuad.w = clip->w;
+		renderQuad.h = clip->h;
 	}
 
 	//Render to screen
