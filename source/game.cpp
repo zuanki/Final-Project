@@ -5,9 +5,9 @@
 SDL_Renderer* Game::gRenderer = NULL;
 
 Player hero;
+Player hero2;
 Map new_map;
-int frame = 0;
-
+int k = 0;
 Game::Game(){}
 Game::~Game(){}
 
@@ -78,6 +78,10 @@ bool Game::loadMedia(){
 	if (!hero.loadImagePlayer("../images/hero.png")){
 		success = false;
 	}
+	hero2.setXYpos(100,100);
+	if (!hero2.loadImagePlayer("../images/hero.png")){
+		success = false;
+	}
 	if(!new_map.loadMap()){
 		success = false;
 	}
@@ -101,18 +105,12 @@ void Game::handleEvents(){
 		}
 		else
 		{
-		hero.handleMovePlayer(e);
+		hero.handleInputPlayer(e);
 		}
 	}
 }
 void Game::update(){
-	++frame;
-
-    //Cycle animation
-    if( frame / 4 >= 4 )
-    {
-        frame = 0;
-    }
+	hero.handleMoveBullet();
 }
 
 void Game::render(){
@@ -123,6 +121,7 @@ void Game::render(){
 	new_map.showMap();
 	
 	hero.showImagePlayer();
+	hero2.showImagePlayer();
 	SDL_RenderPresent( gRenderer );
 	//Update frames
 
