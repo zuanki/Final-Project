@@ -1,4 +1,4 @@
-#include "game.hpp"
+#include <Game.hpp>
 Game *game = NULL;
 
 int main( int argc, char* args[] ){
