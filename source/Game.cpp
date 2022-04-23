@@ -1,10 +1,8 @@
 #include <Game.hpp>
 #include <defs.hpp>
 #include <Map.hpp>
-#include <Player.hpp>
 SDL_Renderer* Game::gRenderer = NULL;
 Map m;
-Player p;
 Game::Game(){}
 Game::~Game(){}
 
@@ -75,9 +73,6 @@ bool Game::loadMedia(){
 	if (!m.loadMap()){
 		success = false;
 	}
-	if(!p.loadPlayer()){
-		success = false;
-	}
 	return success;
 
 }
@@ -98,13 +93,12 @@ void Game::handleEvents(){
 		}
 		else
 		{
-			p.handleInput(e);
+			m.handleEvent(e);
 		}
 	}
 }
 void Game::update(){
 	m.update();
-	p.update();
 }
 
 void Game::render(){
@@ -113,7 +107,6 @@ void Game::render(){
 	SDL_RenderClear( gRenderer );
 	//Update Screen
 	m.draw();
-	p.draw();
 	SDL_RenderPresent( gRenderer );
 	//Update frames
 
@@ -128,5 +121,5 @@ void Game::close(){
 	gRenderer = NULL;
 	//Quit SDL subsystems
 	SDL_Quit();
-	std::cout << "Game clear"<<std::endl;
+	std::cout << "ShinoAki"<<std::endl;
 }
