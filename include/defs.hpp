@@ -20,12 +20,13 @@
 #define BULLET_IMAGE_PATH "../res/images/fire.png"
 #define BACKGROUND_IMAGE_PATH "../res/images/art.jpg"
 #define GRASS_IMAGE_PATH "../res/images/SNOW.png"
-#define WALL_IMAGE_PATH "../res/images/BRICKS.png"
-#define TREE_IMAGE_PATH "../res/images/WATER.png"
+#define WALL_IMAGE_PATH "../res/images/BIGSQUARES.png"
+#define TREE_IMAGE_PATH "../res/images/HEXAGONS.png"
 #define FOUNTAIN_IMAGE_PATH "../res/images/BIGLEAVES.png"
+#define WATER_IMAGE_PATH "../res/images/WATER.png"
 
 //Map
-#define MAP_TEX_PATH "../res/maptype/1.txt"
+#define MAP_TEX_PATH "../res/maptype/2.txt"
 #define SIZE_SMALL 32
-#define LEVEL_WIDTH 1280
-#define LEVEL_HEIGHT 960
+#define LEVEL_WIDTH 1280 //1280*3
+#define LEVEL_HEIGHT 960 //960*3
