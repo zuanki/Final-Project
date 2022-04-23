@@ -1,15 +1,21 @@
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 608
-#define TITLE "PerfectWorld"
+//System
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
+#define TITLE "PERFECTWORLD"
+
+//Player
 #define PLAYER_WIDTH 32
 #define PLAYER_HEIGHT 48
-#define PLAYER_MOVE_SPEED 5
-#define BULLET_SHOOTING_TIMER 10
+#define PLAYER_MOVE_SPEED 16
 #define PLAYER_HEALTH 100
+
+//Bullet
 #define BULLET_WIDTH 32
 #define BULLET_HEIGHT 32
 #define BULLET_MOVE_SPEED 8
-#define SIZE_SMALL 32
+#define BULLET_SHOOTING_TIMER 10
+
+//images
 #define PLAYER_IMAGE_PATH "../res/images/hero.png"
 #define BULLET_IMAGE_PATH "../res/images/fire.png"
 #define BACKGROUND_IMAGE_PATH "../res/images/art.jpg"
@@ -17,4 +23,9 @@
 #define WALL_IMAGE_PATH "../res/images/BRICKS.png"
 #define TREE_IMAGE_PATH "../res/images/WATER.png"
 #define FOUNTAIN_IMAGE_PATH "../res/images/BIGLEAVES.png"
+
+//Map
 #define MAP_TEX_PATH "../res/maptype/1.txt"
+#define SIZE_SMALL 32
+#define LEVEL_WIDTH 1280
+#define LEVEL_HEIGHT 960
