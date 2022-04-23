@@ -13,7 +13,7 @@ enum class Direction {
 class Player {
     private:
         LTexture player;
-        SDL_Rect des;
+        SDL_Rect des;//clip player
         Bullet _bullet;
         std::pair<int, int> pos;
         Direction dir;
@@ -26,6 +26,9 @@ class Player {
         void draw();
         void setPosition(int u, int v){
             pos = std::make_pair(u,v);
+        }
+        std::pair<int, int> getPosition(){
+            return pos;
         }
         SDL_Rect getRect(){
             return des;

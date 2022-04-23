@@ -5,7 +5,7 @@ Player::Player(){
     this->des.y = 0;
     this->des.w = PLAYER_WIDTH;
     this->des.h = PLAYER_HEIGHT;
-    this->setPosition(100,100);
+    this->setPosition(9*32,7*32);
     this->_bullet.setPosition(-32, -32);
     this->dir = Direction::down;
 }
@@ -27,7 +27,7 @@ void Player::handleInput(SDL_Event e){
     {
     case SDLK_UP:    
         this->dir = Direction::up;
-        this->pos.second -= PLAYER_MOVE_SPEED;
+        //this->pos.second -= PLAYER_MOVE_SPEED;
         this->des.y = PLAYER_HEIGHT*3;
         this->des.x+=PLAYER_WIDTH;
         if (this->des.x > PLAYER_WIDTH*3){
@@ -36,7 +36,7 @@ void Player::handleInput(SDL_Event e){
         break;
     case SDLK_DOWN:
         this->dir = Direction::down;
-        this->pos.second += PLAYER_MOVE_SPEED;
+        //this->pos.second += PLAYER_MOVE_SPEED;
         this->des.y = 0;
         this->des.x+=PLAYER_WIDTH;
         if (this->des.x > PLAYER_WIDTH*3){
@@ -45,7 +45,7 @@ void Player::handleInput(SDL_Event e){
         break;
     case SDLK_RIGHT:
         this->dir = Direction::right;
-        this->pos.first += PLAYER_MOVE_SPEED;
+        //this->pos.first += PLAYER_MOVE_SPEED;
         this->des.y = PLAYER_HEIGHT*2;
         this->des.x+=PLAYER_WIDTH;
         if (this->des.x > PLAYER_WIDTH*3){
@@ -54,7 +54,7 @@ void Player::handleInput(SDL_Event e){
         break;
     case SDLK_LEFT:
         this->dir = Direction::left;
-        this->pos.first -= PLAYER_MOVE_SPEED;
+        //this->pos.first -= PLAYER_MOVE_SPEED;
         this->des.y = PLAYER_HEIGHT*1;
         this->des.x+=PLAYER_WIDTH;
         if (this->des.x > PLAYER_WIDTH*3){
