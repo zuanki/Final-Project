@@ -27,6 +27,9 @@ class Player {
         void setPosition(int u, int v){
             pos = std::make_pair(u,v);
         }
+        Direction getDirection(){
+            return dir;
+        }
         std::pair<int, int> getPosition(){
             return pos;
         }
