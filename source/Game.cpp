@@ -2,6 +2,7 @@
 #include <defs.hpp>
 #include <Map.hpp>
 SDL_Renderer* Game::gRenderer = NULL;
+
 Map m;
 Game::Game(){}
 Game::~Game(){}
@@ -62,6 +63,11 @@ bool Game::init(){
 				// }
 			}
 		}
+		if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+        {
+            printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+            success = false;
+        }
 	}
 	return success;
 }
@@ -120,6 +126,7 @@ void Game::close(){
 	gWindow = NULL;
 	gRenderer = NULL;
 	//Quit SDL subsystems
+	Mix_Quit();
 	SDL_Quit();
 	std::cout << "ShinoAki"<<std::endl;
 }
