@@ -16,17 +16,24 @@
 #define BULLET_SHOOTING_TIMER 10
 
 //images
-#define PLAYER_IMAGE_PATH "../res/images/hero.png"
-#define BULLET_IMAGE_PATH "../res/images/fire.png"
-#define BACKGROUND_IMAGE_PATH "../res/images/art.jpg"
-#define GRASS_IMAGE_PATH "../res/images/SNOW.png"
-#define WALL_IMAGE_PATH "../res/images/BIGSQUARES.png"
-#define TREE_IMAGE_PATH "../res/images/HEXAGONS.png"
-#define FOUNTAIN_IMAGE_PATH "../res/images/BIGLEAVES.png"
-#define WATER_IMAGE_PATH "../res/images/WATER.png"
+#define PLAYER_IMAGE_PATH "../resource/images/hero.png"
+#define BULLET_IMAGE_PATH "../resource/images/fire.png"
+#define BACKGROUND_IMAGE_PATH "../resource/images/art.jpg"
+#define GRASS_IMAGE_PATH "../resource/images/SNOW.png"
+#define WALL_IMAGE_PATH "../resource/images/BIGSQUARES.png"
+#define TREE_IMAGE_PATH "../resource/images/HEXAGONS.png"
+#define FOUNTAIN_IMAGE_PATH "../resource/images/BIGLEAVES.png"
+#define WATER_IMAGE_PATH "../resource/images/WATER.png"
 
 //Map
-#define MAP_TEX_PATH "../res/maptype/2.txt"
+#define MAP_TEX_PATH "../resource/maptypes/2.txt"
 #define SIZE_SMALL 32
 #define LEVEL_WIDTH 1280 //1280*3
 #define LEVEL_HEIGHT 960 //960*3
+
+//Fonts 
+#define FONT_PATH "../resource/fonts/EnterCommand.ttf"
+
+//Musics
+
+#define MUSIC_SHOOT_PATH "../resource/audios/shoot.wav"
