@@ -2,6 +2,7 @@
 #include <Texture.hpp>
 #include <Bullet.hpp>
 #include <utility>
+#include <SDL_mixer.h>
 
 enum class Direction {
     up,
@@ -17,6 +18,7 @@ class Player {
         Bullet _bullet;
         std::pair<int, int> pos;
         Direction dir;
+        Mix_Chunk* shoot = NULL;
     public:
         Player();
         ~Player();

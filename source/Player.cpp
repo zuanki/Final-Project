@@ -10,7 +10,7 @@ Player::Player(){
     this->dir = Direction::down;
 }
 Player::~Player(){
-    //
+    Mix_FreeChunk(this->shoot);
 }
 bool Player::loadPlayer(){
     bool success = true;
@@ -18,6 +18,10 @@ bool Player::loadPlayer(){
         success = false;
     }
     if(!this->_bullet.loadBullet()){
+        success = false;
+    }
+    this->shoot = Mix_LoadWAV(MUSIC_SHOOT_PATH);
+    if (this->shoot == NULL){
         success = false;
     }
     return success;
@@ -85,6 +89,7 @@ void Player::handleInput(SDL_Event e){
                     this->_bullet.setMoveCoor(0, BULLET_SHOOTING_TIMER);
                     this->_bullet.setHealth(1);
             }
+            Mix_PlayChannel(-1, this->shoot, 0);
         }
         break;
     default:
