@@ -2,6 +2,7 @@
 #include <MenuState.hpp>
 #include <GameState.hpp>
 SDL_Renderer* Game::renderer = NULL;
+TTF_Font* Game::font = NULL;
 Game::Game(int width, int height, std::string title){
 	// Init SDL
     if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO ) < 0 )
@@ -52,6 +53,13 @@ Game::Game(int width, int height, std::string title){
             printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
             this->data->isRunning = false;
         }
+		if (TTF_Init() == -1){
+			printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+			this->data->isRunning = false;
+		}
+		else {
+			this->font = TTF_OpenFont(FONT_PATH, FONT_SIZE);
+		}
     }
 
 	//**************************************************//
@@ -59,12 +67,15 @@ Game::Game(int width, int height, std::string title){
 	this->run();
 }  
 Game::~Game(){
+	TTF_CloseFont(this->font);
+	this->font = NULL;
+	Mix_Quit();
+	TTF_Quit();
     SDL_DestroyRenderer(this->renderer);
     this->renderer = NULL;
     SDL_DestroyWindow(this->window);
     this->window = NULL;
     SDL_Quit();
-	Mix_Quit();
     std::cout<<"ShinoAki"<<std::endl;
 }
 

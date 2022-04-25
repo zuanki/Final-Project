@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SDL_image.h>
 #include <StateMachine.hpp>
+#include <SDL_ttf.h>
 class GameData {
     public:
         StateMachine machine;
@@ -20,4 +21,5 @@ class Game {
         Game(int width, int height, std::string title);
         ~Game();
         static SDL_Renderer* renderer;
+        static TTF_Font* font;
 };
