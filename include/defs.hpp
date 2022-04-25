@@ -33,7 +33,15 @@
 
 //Fonts 
 #define FONT_PATH "../resource/fonts/EnterCommand.ttf"
+#define FONT_SIZE 30
 
 //Musics
-
 #define MUSIC_SHOOT_PATH "../resource/audios/shoot.wav"
+
+//RGB color
+#define BLACK_COLOR {0, 0, 0}
+#define RED_COLOR {255, 0, 0}
+#define WHITE_COLOR {255, 255, 255}
+#define BLUE_COLOR {0, 0, 255}
+#define GREEN_COLOR {0, 255, 0}
+#define YELLOW_COLOR {255, 255,0}
