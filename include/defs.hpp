@@ -26,10 +26,10 @@
 #define WATER_IMAGE_PATH "../resource/images/WATER.png"
 
 //Map
-#define MAP_TEX_PATH "../resource/maptypes/2.txt"
+#define MAP_TEX_PATH "../resource/maptypes/1.txt"
 #define SIZE_SMALL 32
-#define LEVEL_WIDTH 1280 //1280*3
-#define LEVEL_HEIGHT 960 //960*3
+#define LEVEL_WIDTH 1280*3 //1280*3
+#define LEVEL_HEIGHT 960*3 //960*3
 
 //Fonts 
 #define FONT_PATH "../resource/fonts/EnterCommand.ttf"
