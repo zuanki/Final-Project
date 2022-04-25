@@ -14,10 +14,12 @@ enum class Direction {
 class Player {
     private:
         LTexture player;
+        LTexture hp_text;
         SDL_Rect des;//clip player
         Bullet _bullet;
         std::pair<int, int> pos;
         Direction dir;
+        int hp;
         Mix_Chunk* shoot = NULL;
     public:
         Player();
@@ -26,6 +28,12 @@ class Player {
         bool loadPlayer();
         void update();
         void draw();
+        int getHP(){
+            return hp;
+        }
+        void setHP(int x){
+            hp = x;
+        }
         void setPosition(int u, int v){
             pos = std::make_pair(u,v);
         }

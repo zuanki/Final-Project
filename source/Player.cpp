@@ -8,6 +8,7 @@ Player::Player(){
     this->setPosition(9*32,7*32);
     this->_bullet.setPosition(-32, -32);
     this->dir = Direction::down;
+    this->hp = 100;
 }
 Player::~Player(){
     Mix_FreeChunk(this->shoot);
@@ -24,6 +25,7 @@ bool Player::loadPlayer(){
     if (this->shoot == NULL){
         success = false;
     }
+    this->hp_text.loadFromRenderText("HP: "+std::to_string(this->hp), RED_COLOR);
     return success;
 }
 void Player::handleInput(SDL_Event e){
@@ -104,6 +106,7 @@ void Player::update(){
 }
 void Player::draw(){
     this->player.render(pos.first, pos.second, &des);
+    this->hp_text.render(0, 0);
     if (this->_bullet.getHealth() == 1){
         this->_bullet.draw();
     }
