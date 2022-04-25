@@ -2,20 +2,13 @@
 #include <GameState.hpp>
 #include <defs.hpp>
 MenuState::MenuState(GameDataRef data) : data(data) {
-    this->background_clip.x = 0;
-    this->background_clip.y = 0;
-    this->background_clip.w = 500;
-    this->background_clip.h = 400;
+    
 }
 MenuState::~MenuState(){
     //
 }
 void MenuState::init(){
-    bool x = background.loadFromFile(BACKGROUND_IMAGE_PATH);
-    if (x == false){
-        std::cout<<"Can't load background"<<std::endl;
-        this->data->isRunning = false;
-    }
+    this->text.loadFromRenderText("Press Space to continue !!!", GREEN_COLOR);
 }
 void MenuState::handleInput(){
     SDL_Event e;
@@ -39,5 +32,5 @@ void MenuState::update(){
     //
 }
 void MenuState::draw(){
-    this->background.render(0,0, &this->background_clip);
+    this->text.render(100, 100);
 }

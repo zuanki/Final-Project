@@ -14,6 +14,5 @@ class MenuState : public State
 
     private:
         GameDataRef data;
-        LTexture background;
-        SDL_Rect background_clip;
+        LTexture text;
 };
