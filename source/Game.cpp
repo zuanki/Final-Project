@@ -1,132 +1,81 @@
 #include <Game.hpp>
-#include <defs.hpp>
-#include <Map.hpp>
-SDL_Renderer* Game::gRenderer = NULL;
-
-Map m;
-Game::Game(){}
-Game::~Game(){}
-
-bool Game::init(){
-	//Initialization flag
-	bool success = true;
-
-	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO ) < 0 )
+#include <MenuState.hpp>
+#include <GameState.hpp>
+SDL_Renderer* Game::renderer = NULL;
+Game::Game(int width, int height, std::string title){
+	// Init SDL
+    if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO ) < 0 )
 	{
-		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
-		success = false;
+		std::cout<<"SDL could not initialize! SDL Error:"<<SDL_GetError()<<std::endl;
+        this->data->isRunning = false;
 	}
-	else
+    else
 	{
 		//Set texture filtering to linear
 		if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" ) )
 		{
-			printf( "Warning: Linear texture filtering not enabled!" );
+			std::cout<<"Warning: Linear texture filtering not enabled!"<<std::endl;
+            this->data->isRunning = false;
 		}
-
 		//Create window
-		gWindow = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
-		if( gWindow == NULL )
+		this->window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN );
+		if( this->window == NULL )
 		{
-			printf( "Window could not be created! %s\n", SDL_GetError() );
-			success = false;
+			std::cout<<"Window could not be created!"<<SDL_GetError()<<std::endl;
+			this->data->isRunning = false;
 		}
 		else
 		{
 			//Create renderer for window
-			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-			if( gRenderer == NULL )
+			this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+			if( this->renderer == NULL )
 			{
-				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
-				success = false;
+				std::cout<<"Renderer could not be created! SDL Error:"<<SDL_GetError()<<std::endl;
+                this->data->isRunning = false;
 			}
 			else
 			{
 				//Initialize renderer color
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+				SDL_SetRenderDrawColor(this->renderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
 				//Initialize PNG loading
 				int imgFlags = IMG_INIT_PNG;
 				if( !( IMG_Init( imgFlags ) & imgFlags ) )
 				{
-					printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
-					success = false;
+					std::cout<<"SDL_image could not initialize! SDL_image Error:"<<IMG_GetError()<<std::endl;
+                    this->data->isRunning = false;
 				}
-
-				//Initialize SDL_Mixer
-
-				//Initialize SDL_ttf
-				// if( TTF_Init() == -1)
-				// {
-				// 	printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
-				// }
 			}
 		}
 		if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
         {
             printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
-            success = false;
+            this->data->isRunning = false;
         }
-	}
-	return success;
-}
+    }
 
-bool Game::loadMedia(){
-
-	bool success = true;
-	SDL_Color textColor = {0, 0, 0, 255};
-	if (!m.loadMap()){
-		success = false;
-	}
-	return success;
-
-}
-
-void Game::handleEvents(){
-
-    //Event handler
-    SDL_Event e;
-	//Handle events on queue
-
-
-	while( SDL_PollEvent( &e ) != 0 )
-	{
-		//User requests quit
-		if( e.type == SDL_QUIT )
-		{
-			isRunning = false;
-		}
-		else
-		{
-			m.handleEvent(e);
-		}
-	}
-}
-void Game::update(){
-	m.update();
-}
-
-void Game::render(){
-	//Clear screen
-	SDL_SetRenderDrawColor( gRenderer, 255, 255, 255, 255 );
-	SDL_RenderClear( gRenderer );
-	//Update Screen
-	m.draw();
-	SDL_RenderPresent( gRenderer );
-	//Update frames
-
-}
-
-void Game::close(){
-
-	//Destroy window
-	SDL_DestroyRenderer( gRenderer );
-	SDL_DestroyWindow( gWindow );
-	gWindow = NULL;
-	gRenderer = NULL;
-	//Quit SDL subsystems
+	//**************************************************//
+	this->data->machine.addState(StateRef(std::make_unique<MenuState>(this->data)));
+	this->run();
+}  
+Game::~Game(){
+    SDL_DestroyRenderer(this->renderer);
+    this->renderer = NULL;
+    SDL_DestroyWindow(this->window);
+    this->window = NULL;
+    SDL_Quit();
 	Mix_Quit();
-	SDL_Quit();
-	std::cout << "ShinoAki"<<std::endl;
+    std::cout<<"ShinoAki"<<std::endl;
+}
+
+void Game::run(){
+	while (this->data->isRunning)
+	{
+		SDL_RenderClear(this->renderer);
+		this->data->machine.processStateChanges();
+		this->data->machine.getActiveState()->handleInput();
+		this->data->machine.getActiveState()->update();
+		this->data->machine.getActiveState()->draw();
+		SDL_RenderPresent(this->renderer);
+	}
 }

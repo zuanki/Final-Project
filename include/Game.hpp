@@ -1,27 +1,23 @@
 #pragma once
-#include <iostream>
 #include <SDL.h>
+#include <iostream>
 #include <SDL_image.h>
+#include <StateMachine.hpp>
+class GameData {
+    public:
+        StateMachine machine;
+        bool isRunning = true;
+};
 
-class Game{
-private:
-    int cnt =0;
-    bool isRunning = true;
-    SDL_Window* gWindow = NULL;
+using GameDataRef = std::shared_ptr<GameData>;
 
-public:
-    Game();
-    ~Game();
-    bool init();
-    bool loadMedia();
-    void handleEvents();
-    void update();
-    void render();
-    void close();
-
-    bool getGameState(){ return isRunning; }
-
-    static SDL_Renderer* gRenderer;
-
-    //static TTF_Font* gFont;
+class Game {
+    private:
+        SDL_Window* window = NULL;
+        GameDataRef data = std::make_shared<GameData>();
+        void run();
+    public:
+        Game(int width, int height, std::string title);
+        ~Game();
+        static SDL_Renderer* renderer;
 };
