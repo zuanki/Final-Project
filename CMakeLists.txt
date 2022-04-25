@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(UET2022)
 include_directories(include)
+
+set(SOURCES source/main.cpp source/Game.cpp source/Texture.cpp source/StateMachine.cpp source/MenuState.cpp source/GameState.cpp source/Player.cpp source/Map.cpp source/Bullet.cpp)
+
+
 find_package(SDL2 REQUIRED)
 
 # if(NOT SDL2_IMAGE_INCLUDE_DIR AND SDL2IMAGE_INCLUDE_DIR)
@@ -195,7 +199,6 @@ INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS} ${SDL2MIXER_INCLUDE_DIR})
 
 
 
-set(SOURCES source/main.cpp source/Game.cpp source/Map.cpp source/Texture.cpp source/Map.cpp source/Player.cpp source/Bullet.cpp)
 #file(GLOB SOURCES "source/*.cpp")
 
 add_executable(main ${SOURCES})
