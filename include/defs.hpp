@@ -1,6 +1,6 @@
 //System
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 640    //640
+#define SCREEN_HEIGHT 480   //480
 #define TITLE "PERFECTWORLD"
 
 //Player
