@@ -1,6 +1,6 @@
 #include <GameState.hpp>
 #include <defs.hpp>
-
+#include <WinState.hpp>
 GameState::GameState(GameDataRef data) : data(data) {
     
 }
@@ -9,9 +9,6 @@ GameState::~GameState(){
 }
 void GameState::init(){
     bool x = m.loadMap();
-    if (x){
-        std::cout<<"Can't load map"<<std::endl;
-    }
 }
 void GameState::handleInput(){
     SDL_Event e;
@@ -19,9 +16,18 @@ void GameState::handleInput(){
         if (e.type == SDL_QUIT){
             this->data->isRunning = false;
         }
-        else {
-            m.handleEvent(e);
+        if (e.type == SDL_KEYDOWN){
+            switch (e.key.keysym.sym)
+            {
+            case SDLK_n:
+                this->data->machine.addState(StateRef(std::make_unique<WinState>(this->data)));
+                break;
+            
+            default:
+                break;
+            }
         }
+        m.handleEvent(e);
     }
 }
 void GameState::update(){
