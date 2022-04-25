@@ -55,22 +55,21 @@ bool LTexture::loadFromFile( std::string path )
 	mTexture = newTexture;
 	return mTexture != NULL;
 }
-
-#if defined(SDL_TTF_MAJOR_VERSION)
-bool LTexture::loadFromRenderText( string textureText, SDL_Color textColor)
+bool LTexture::loadFromRenderText(std::string textureText, SDL_Color textColor)
 {
 	//Get rid of preexisting texture
 	free();
 
 	//Render text surface
-	SDL_Surface* textSurface = TTF_RenderText_Solid(Game::gFont, textureText.c_str(), textColor);
+	//SDL_Surface* textSurface = TTF_RenderText_Solid(Game::font, textureText.c_str(), textColor);
+	SDL_Surface* textSurface = TTF_RenderText_Blended_Wrapped(Game::font, textureText.c_str(), textColor, 500);
 	if( textSurface == NULL )
 	{
 		printf(" Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
 	}
 	else
 	{
-		mTexture = SDL_CreateTextureFromSurface( Game::gRenderer, textSurface);
+		mTexture = SDL_CreateTextureFromSurface( Game::renderer, textSurface);
 		if( mTexture == NULL )
 		{
 			printf("Unable to create texture form rendered text! SDL error: %s\n", SDL_GetError());
@@ -78,15 +77,13 @@ bool LTexture::loadFromRenderText( string textureText, SDL_Color textColor)
 		else{
 			mWidth = textSurface->w;
 			mHeight = textSurface->h;
-
 		}
-
 		//get rid of old surface
 		SDL_FreeSurface(textSurface);
+		textSurface = NULL;
 	}
 	return mTexture!= NULL;
 }
-#endif
 
 void LTexture::free()
 {
