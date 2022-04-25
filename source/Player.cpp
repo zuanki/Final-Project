@@ -8,7 +8,6 @@ Player::Player(){
     this->setPosition(9*32,7*32);
     this->_bullet.setPosition(-32, -32);
     this->dir = Direction::down;
-    this->hp = 100;
 }
 Player::~Player(){
     Mix_FreeChunk(this->shoot);
@@ -92,6 +91,7 @@ void Player::handleInput(SDL_Event e){
                     this->_bullet.setHealth(1);
             }
             Mix_PlayChannel(-1, this->shoot, 0);
+            this->hp -=10 ;
         }
         break;
     default:
@@ -110,4 +110,5 @@ void Player::draw(){
     if (this->_bullet.getHealth() == 1){
         this->_bullet.draw();
     }
+    //std::cout<<this->hp<<std::endl;
 }

@@ -19,7 +19,7 @@ class Player {
         Bullet _bullet;
         std::pair<int, int> pos;
         Direction dir;
-        int hp;
+        int hp = 100;
         Mix_Chunk* shoot = NULL;
     public:
         Player();
