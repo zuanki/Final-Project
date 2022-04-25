@@ -35,7 +35,7 @@ bool LTexture::loadFromFile( std::string path )
 		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGBA( loadedSurface->format, 0xFF,0xFF,0xFF,255 ) );
 
 		//Create texture from surface pixels
-        newTexture = SDL_CreateTextureFromSurface( Game::gRenderer, loadedSurface );
+        newTexture = SDL_CreateTextureFromSurface( Game::renderer, loadedSurface );
 		if( newTexture == NULL )
 		{
 			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
@@ -119,7 +119,7 @@ void LTexture::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* ce
 	}
 
 	//Render to screen
-	SDL_RenderCopyEx( Game::gRenderer, mTexture, clip, &renderQuad, angle, center, flip );
+	SDL_RenderCopyEx( Game::renderer, mTexture, clip, &renderQuad, angle, center, flip );
 }
 
 void LTexture::setBlendMode( SDL_BlendMode blending){

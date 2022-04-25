@@ -39,7 +39,6 @@ class LTexture
 	private:
 		//The actual hardware texture
 		SDL_Texture* mTexture;
-
 		//Image dimensions
 		int mWidth;
 		int mHeight;
