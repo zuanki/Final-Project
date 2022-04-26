@@ -10,7 +10,7 @@
 class RenderWindow
 {
     public:
-        RenderWindow(const std::string& title, int width, int height);
+        RenderWindow();
         ~RenderWindow();
         bool isOpen() const;
         Vector2i getSize() const;
@@ -23,6 +23,7 @@ class RenderWindow
         void setView(const View& view);
         View getView() const;
         View getDefaultView() const;
+        void create(const std::string& title, int width, int height);
     private:
         SDL_Window* window;
         SDL_Renderer* renderer;

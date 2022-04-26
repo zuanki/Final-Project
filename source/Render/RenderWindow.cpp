@@ -1,15 +1,16 @@
 #include <Render/RenderWindow.hpp>
 
-RenderWindow::RenderWindow(const std::string &title, int width, int height)
+RenderWindow::RenderWindow()
 {
+    this->open = true;
+    this->view = this->getDefaultView();
+}
+void RenderWindow::create(const std::string& title, int width, int height){
     this->window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
     this->size.x = width;
     this->size.y = height;
-    this->open = true;
     this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
-    this->view = this->getDefaultView();
 }
-
 RenderWindow::~RenderWindow()
 {
     SDL_DestroyRenderer(this->renderer);
