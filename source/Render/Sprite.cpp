@@ -50,7 +50,6 @@ void Sprite::move(const Vector2i &offset)
 void Sprite::setTexture(SDL_Texture *texture)
 {
     this->texture = texture;
-
     int w, h;
     SDL_QueryTexture(texture, NULL, NULL, &w, &h);
     this->textureRect = {0, 0, w, h};
