@@ -1,10 +1,10 @@
 #pragma once 
 #include <Game.hpp>
 #include <Render/Sprite.hpp>
-
+#include <vector>
 class Map {
     private:    
-        Sprite sprite_map;
+        Sprite map_sprite;
         SDL_Texture* mapTexture;
         GameDataRef data;
     public:
