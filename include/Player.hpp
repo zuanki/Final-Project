@@ -6,7 +6,6 @@
 class Player {
     private:    
         Sprite sprite_player;
-        SDL_Texture* playerTexture;
         SDL_Rect player_clip;
         GameDataRef data;
         View playerView;

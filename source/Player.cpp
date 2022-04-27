@@ -1,18 +1,13 @@
 #include <Player.hpp>
-#include <Defs.hpp>
+
 Player::Player(GameDataRef data) : data(data){
-    this->playerTexture = IMG_LoadTexture(this->data->window.getRenderer(), PLAYER_IMAGE_PATH);
-    if (this->playerTexture == NULL){
-        std::cout<<"Can't load player image"<<std::endl;
-        this->data->window.close();
-    }
     this->moveSpeed = 32;
-    this->sprite_player.setTexture(this->playerTexture);
+    this->sprite_player.setTexture(this->data->assets.getTexture("player"));
     this->player_clip = {0, 0, 32, 48};
     this->sprite_player.setTextureRect(this->player_clip);
 }
 Player::~Player(){
-    SDL_DestroyTexture(this->playerTexture);
+    
 }
 void Player::handleInput(SDL_Event e){
     if (e.type == SDL_KEYDOWN) {
