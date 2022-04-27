@@ -1,9 +1,10 @@
 #include <GameState.hpp>
-
+#include <Defs.hpp>
 GameState::GameState(GameDataRef data) : data(data) {
     
 }
 void GameState::init(){
+    this->data->assets.loadTexture("player", PLAYER_IMAGE_PATH);
     this->player = std::make_unique<Player>(this->data);
     this->map = std::make_unique<Map>(this->data);
 }
