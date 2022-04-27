@@ -2,11 +2,14 @@
 #include <StateMachine.hpp>
 #include <Render/RenderWindow.hpp>
 #include <iostream>
+#include <AssetManager.hpp>
 
-struct GameData
-{
-    StateMachine machine;
-    RenderWindow window;
+class GameData
+{   
+    public:
+        StateMachine machine;
+        RenderWindow window;
+        AssetManager assets;
 };
 
 using GameDataRef = std::shared_ptr<GameData>;
