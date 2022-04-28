@@ -5,6 +5,9 @@ struct Vector2
 {
     T x, y;
     Vector2(T x = 0, T y = 0) : x(x), y(y) {}
+    Vector2 operator*(int k){
+        return Vector2(x*k, y*k);
+    }
 };
 
 using Vector2f = Vector2<float>;
