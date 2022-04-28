@@ -16,5 +16,6 @@ void Game::run(){
     }
 }
 Game::~Game(){
+    std::cout<<"ShinoAki"<<std::endl;
     SDL_Quit();
 }
