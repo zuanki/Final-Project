@@ -1,14 +1,15 @@
 #pragma once 
 #include <Game.hpp>
-#include <Render/Sprite.hpp>
+#include <Tile.hpp>
 #include <vector>
 class Map {
     private:    
-        Sprite map_sprite;
-        SDL_Texture* mapTexture;
+        std::vector<std::unique_ptr<Tile>> map;
+        std::vector<std::string> map_text;
         GameDataRef data;
     public:
         Map(GameDataRef data);
         ~Map();
+        void init();
         void draw();
 };
