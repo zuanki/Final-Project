@@ -18,6 +18,9 @@ class Sprite
         void move(const Vector2i& offset);
         void setTexture(SDL_Texture* texture);
         void setTextureRect(const SDL_Rect& textureRect);
+        SDL_Rect getGlobalBounds(){
+            return destRect;
+        }
     private:
         SDL_Texture* texture;
         SDL_Rect textureRect;
