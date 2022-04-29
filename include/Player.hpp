@@ -5,13 +5,7 @@
 #include <Utility/Vector2.hpp>
 #include <Render/View.hpp>
 #include <Bullet.hpp>
-
-enum class Direction {
-    up,
-    down, 
-    right,
-    left
-};
+#include <Direction.hpp>
 
 class Player {
     private:    

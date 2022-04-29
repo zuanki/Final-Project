@@ -17,7 +17,7 @@ void Player::handleInput(SDL_Event e){
     if (e.type == SDL_KEYDOWN) {
         switch (e.key.keysym.scancode)  
         {
-        case SDL_SCANCODE_W:
+        case SDL_SCANCODE_UP:
             this->dir = Direction::up;
             this->pos.second -= this->moveSpeed;
             this->player_clip.y = 48*3;
@@ -26,7 +26,7 @@ void Player::handleInput(SDL_Event e){
                 this->player_clip.x = 0;
             }
             break;
-        case SDL_SCANCODE_S:
+        case SDL_SCANCODE_DOWN:
             this->dir = Direction::down;
             this->pos.second += this->moveSpeed;
             this->player_clip.y = 48*0;
@@ -35,7 +35,7 @@ void Player::handleInput(SDL_Event e){
                 this->player_clip.x = 0;
             }
             break;
-        case SDL_SCANCODE_A:
+        case SDL_SCANCODE_LEFT:
             this->dir = Direction::left;
             this->pos.first -= this->moveSpeed;
             this->player_clip.y = 48*1;
@@ -44,7 +44,7 @@ void Player::handleInput(SDL_Event e){
                 this->player_clip.x = 0;
             }
             break;
-        case SDL_SCANCODE_D:
+        case SDL_SCANCODE_RIGHT:
             this->dir = Direction::right;
             this->pos.first += this->moveSpeed;
             this->player_clip.y = 48*2;
@@ -56,22 +56,22 @@ void Player::handleInput(SDL_Event e){
         case SDL_SCANCODE_SPACE:
             {
                 if (this->dir == Direction::down && this->_bullet->getHealth() == 0){
-                    this->coor_bullet = std::make_pair(0, 1);
+                    this->coor_bullet = std::make_pair(0, SHOOTING_SPEED);
                     this->_bullet->setPosition(pos.first, pos.second+32);
                     this->_bullet->setHealth(1);
                 }
                 else if (this->dir == Direction::up && this->_bullet->getHealth() == 0){
-                    this->coor_bullet = std::make_pair(0, -1);
+                    this->coor_bullet = std::make_pair(0, -SHOOTING_SPEED);
                     this->_bullet->setPosition(pos.first, pos.second-32);
                     this->_bullet->setHealth(1);
                 }
                 else if (this->dir == Direction::left && this->_bullet->getHealth() == 0){
-                    this->coor_bullet = std::make_pair(-1, 0);
+                    this->coor_bullet = std::make_pair(-SHOOTING_SPEED, 0);
                     this->_bullet->setPosition(pos.first-32, pos.second);
                     this->_bullet->setHealth(1);
                 }
                 else if (this->dir == Direction::right && this->_bullet->getHealth() == 0){
-                    this->coor_bullet = std::make_pair(1, 0);
+                    this->coor_bullet = std::make_pair(SHOOTING_SPEED, 0);
                     this->_bullet->setPosition(pos.first+32, pos.second);
                     this->_bullet->setHealth(1);
                 }
@@ -85,7 +85,7 @@ void Player::handleInput(SDL_Event e){
 }
 void Player::update(){
     this->_bullet->move(this->coor_bullet);
-    if (this->_bullet->getPosition().first > this->pos.first + 200 || this->_bullet->getPosition().first < this->pos.first-200 || this->_bullet->getPosition().second > this->pos.second +200 || this->_bullet->getPosition().second < this->pos.second -200){
+    if (this->_bullet->getPosition().first > this->pos.first + 350 || this->_bullet->getPosition().first < this->pos.first-350 || this->_bullet->getPosition().second > this->pos.second +350 || this->_bullet->getPosition().second < this->pos.second -350){
         this->_bullet->setHealth(0);
     }
     this->sprite_player.setPosition(pos.first, pos.second);
