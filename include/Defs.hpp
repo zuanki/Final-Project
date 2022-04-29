@@ -2,8 +2,6 @@
 #define TITLE "SkyWalker"
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
-#define LEVEL_WIDTH 1280
-#define LEVEL_HEIGHT 960
 
 //Player 
 #define PLAYER_IMAGE_PATH "../resource/images/hero.png"
@@ -19,3 +17,8 @@
 //Bullets 
 #define BULLET_IMAGE_PATH "../resource/images/fire.png"
 #define SHOOTING_SPEED 8
+
+//Enemies
+#define MANTIS_IMAGE_PATH "../resource/images/Enemies/MantisAttack.png"
+#define ENEMY_NUM_FRAMES 7
+#define ENEMY_FRAMES_TIME 1.f/12.f
