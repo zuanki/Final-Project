@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 #include <Game.hpp>
 #include <memory>
 #include <Render/Sprite.hpp>
@@ -6,34 +6,51 @@
 #include <Render/View.hpp>
 #include <Bullet.hpp>
 #include <Direction.hpp>
+//#include <BulletManager.hpp>
 
-class Player {
-    private:    
-        Sprite sprite_player;
-        SDL_Rect player_clip;
-        std::unique_ptr<Bullet> _bullet;
-        GameDataRef data;
-        View playerView;
-        Direction dir;
-        std::pair<int, int> pos;
-        std::pair<int, int> coor_bullet;
-        int moveSpeed;
-        int hp = 3;
-    public:
-        Player(GameDataRef data);
-        ~Player();
-        void handleInput(SDL_Event e);
-        void update();
-        void draw();
-        void setPosition(int u, int v);
-        SDL_Rect getGlobalBounds() {
-            return this->sprite_player.getGlobalBounds();
-        }
-        void takeHit(){
-            --this->hp;
-        }
-        // return current hp
-        int getHP() {
-            return this->hp;
-        }
+class Player
+{
+private:
+    Sprite sprite_player;
+    SDL_Rect player_clip;
+    GameDataRef data;
+    // Vector2f direction;
+    //  std::unique_ptr<BulletManager> _bullets;
+    View playerView;
+    Direction dir;
+    std::pair<float, float> pos;
+    std::pair<float, float> velocity;
+    // float shootingTimer;
+    int moveSpeed;
+    int hp = 3;
+
+public:
+    Player(GameDataRef data);
+    ~Player();
+    void handleInput(SDL_Event e);
+    void update(float deltaTime);
+    void draw();
+    void setPosition(int u, int v);
+    void setVelocity(float u, float v)
+    {
+        velocity = std::make_pair(u, v);
+    }
+    SDL_Rect getGlobalBounds()
+    {
+        return this->sprite_player.getGlobalBounds();
+    }
+    void takeHit()
+    {
+        --this->hp;
+    }
+    // return current hp
+    int getHP()
+    {
+        return this->hp;
+    }
+    void shoot();
+    Direction getDirection()
+    {
+        return dir;
+    }
 };
