@@ -6,14 +6,15 @@
 
 using StateRef = std::unique_ptr<State>;
 
-class StateMachine {
+class StateMachine
+{
 public:
     StateMachine() = default;
     ~StateMachine() = default;
     void addState(StateRef newState, bool isReplacing = true);
     void removeState();
     void processStateChanges();
-    StateRef& getActiveState();
+    StateRef &getActiveState();
 
 private:
     std::stack<StateRef> states;
