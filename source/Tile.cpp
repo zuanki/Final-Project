@@ -1,16 +1,20 @@
 #include <Tile.hpp>
 
-Tile::Tile(GameDataRef data) : data(data){
+Tile::Tile(GameDataRef data) : data(data)
+{
     this->p.setPosition(0, 0);
 }
-Tile::~Tile(){
+Tile::~Tile()
+{
     //
 }
 
-void Tile::setTexture(SDL_Texture* tex){
+void Tile::setTexture(SDL_Texture *tex)
+{
     this->p.setTexture(tex);
 }
 
-void Tile::draw(){
+void Tile::draw()
+{
     this->data->window.draw(this->p);
 }
