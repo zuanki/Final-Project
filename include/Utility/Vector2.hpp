@@ -1,12 +1,13 @@
-#pragma once 
+#pragma once
 
-template<class T>
+template <class T>
 struct Vector2
 {
     T x, y;
     Vector2(T x = 0, T y = 0) : x(x), y(y) {}
-    Vector2 operator*(int k){
-        return Vector2(x*k, y*k);
+    Vector2 operator*(float k)
+    {
+        return Vector2(x * k, y * k);
     }
 };
 
