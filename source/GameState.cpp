@@ -10,8 +10,10 @@ void GameState::init(){
     this->data->assets.loadTexture("tree_tile", MAP_TREE_IMAGE_PATH);
     this->data->assets.loadTexture("water_tile", MAP_WATER_IMAGE_PATH);
     this->data->assets.loadTexture("bullet_fire", BULLET_IMAGE_PATH);
+    this->data->assets.loadTexture("mantis_enemy", MANTIS_IMAGE_PATH);
     this->player = std::make_unique<Player>(this->data);
     this->map = std::make_unique<Map>(this->data);
+    this->enemy = std::make_unique<Enemy>(this->data);
     this->map->init();
 }
 void GameState::handleInput(){
@@ -29,10 +31,12 @@ void GameState::handleInput(){
 }
 void GameState::update(){
     this->player->update();
+    this->enemy->update();
 }
 void GameState::draw() const {
     this->data->window.clear();
     this->map->draw();
+    this->enemy->draw();
     this->player->draw();
     this->data->window.display();
 }

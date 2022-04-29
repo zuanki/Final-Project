@@ -2,6 +2,7 @@
 #include <Game.hpp>
 #include <Player.hpp>
 #include <Map.hpp>
+#include <Enemy.hpp>
 class GameState: public State {
     public:
         GameState(GameDataRef data);
@@ -13,4 +14,5 @@ class GameState: public State {
         GameDataRef data;
         std::unique_ptr<Player> player;
         std::unique_ptr<Map> map;
+        std::unique_ptr<Enemy> enemy;
 };
