@@ -6,7 +6,8 @@ Sprite::Sprite()
     this->textureRect = {0, 0, 0, 0};
     this->destRect = {0, 0, 0, 0};
 }
-Sprite::~Sprite(){
+Sprite::~Sprite()
+{
     SDL_DestroyTexture(this->texture);
 }
 Sprite::Sprite(SDL_Texture *texture)
@@ -42,7 +43,7 @@ void Sprite::move(int offsetX, int offsetY)
     this->destRect.y += offsetY;
 }
 
-void Sprite::move(const Vector2i &offset)
+void Sprite::move(const Vector2f &offset)
 {
     this->move(offset.x, offset.y);
 }
