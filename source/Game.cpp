@@ -13,6 +13,7 @@ void Game::run(){
         this->data->machine.getActiveState()->handleInput();
         this->data->machine.getActiveState()->update();
         this->data->machine.getActiveState()->draw();
+        SDL_Delay(100);
     }
 }
 Game::~Game(){
