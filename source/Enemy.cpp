@@ -4,7 +4,7 @@ Enemy::Enemy(GameDataRef data) : data(data)
 {
     this->sprite.setTexture(this->data->assets.getTexture("mantis_enemy"));
     this->sprite.setTextureRect({0, 0, 32, 32});
-    this->sprite.setPosition(-64, -64);
+    this->sprite.setPosition(8 * 32, 9 * 32);
     this->animation = std::make_unique<Animation>(32 * 7, 32 * 4, ENEMY_NUM_FRAMES, ENEMY_FRAMES_TIME);
     this->animation->setFrameRect(0, 32 * 0);
     this->animation->applyToSprite(this->sprite);
