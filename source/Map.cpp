@@ -97,9 +97,25 @@ void Map::checkCollisionWithWall()
 
     for (int i = 0; i < this->wall.size(); i++)
     {
+
         if (Collision::checkCollision(this->player->getGlobalBounds(), this->wall[i]->getGlobalBounds()))
         {
-            this->player->setVelocity(0, 0);
+            if (this->player->getDirection() == Direction::up)
+            {
+                this->player->setVelocity(0, 32);
+            }
+            else if (this->player->getDirection() == Direction::down)
+            {
+                this->player->setVelocity(0, -32);
+            }
+            else if (this->player->getDirection() == Direction::left)
+            {
+                this->player->setVelocity(32, 0);
+            }
+            else if (this->player->getDirection() == Direction::right)
+            {
+                this->player->setVelocity(-32, 0);
+            }
         }
     }
 
