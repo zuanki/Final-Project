@@ -12,6 +12,9 @@ void GameState::init()
     this->data->assets.loadTexture("water_tile", MAP_WATER_IMAGE_PATH);
     this->data->assets.loadTexture("bullet_fire", BULLET_IMAGE_PATH);
     this->data->assets.loadTexture("mantis_enemy", MANTIS_IMAGE_PATH);
+    this->data->assets.loadFont("Font24", FONT_PATH, 24);
+    this->data->assets.loadMusic(MUSIC_PATH);
+    this->data->assets.loadChuck(CHUCK_PATH);
     this->map = std::make_unique<Map>(this->data);
     this->enemy = std::make_unique<Enemy>(this->data);
     this->map->init();
