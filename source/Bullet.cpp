@@ -15,10 +15,10 @@ void Bullet::update(float deltaTime)
     // std::cout << d.x << ' ' << d.y << '\n'
     this->sprite.move(this->direction * this->moveSpeed * deltaTime);
     // std::cout << this->getGlobalBounds().y << '\n';
-    if (this->getGlobalBounds().y < 0)
+    if (this->getGlobalBounds().y < 0 || this->getGlobalBounds().x < 0 || this->getGlobalBounds().y > 1500 || this->getGlobalBounds().x > 1500)
     {
         this->setOut();
-        std::cout << "Delete \n";
+        // std::cout << "Delete \n";
     }
 }
 
