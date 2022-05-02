@@ -1,20 +1,33 @@
 #include <Render/RenderWindow.hpp>
-
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
 RenderWindow::RenderWindow()
 {
     this->open = true;
     this->view = this->getDefaultView();
 }
-void RenderWindow::create(const std::string& title, int width, int height){
+void RenderWindow::create(const std::string &title, int width, int height)
+{
     this->window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
     this->size.x = width;
     this->size.y = height;
     this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
+    if (TTF_Init() == -1)
+    {
+        std::cout << "SDL_ttf could not initialize! SDL_ttf Error: %s\n"
+                  << TTF_GetError() << std::endl;
+    }
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+    {
+        printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+    }
 }
 RenderWindow::~RenderWindow()
 {
     SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->window);
+    TTF_Quit();
+    Mix_Quit();
 }
 
 bool RenderWindow::isOpen() const
