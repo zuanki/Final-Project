@@ -8,10 +8,11 @@ Player::Player(GameDataRef data) : data(data)
     this->sprite_player.setTextureRect(this->player_clip);
     this->pos = std::make_pair(32, 32);
     this->dir = Direction::down;
-    // this->direction.x = 0.f;
-    // this->direction.y = 0.f;
-    // this->shootingTimer = BULLET_SHOOTING_COOLDOWN;
-    // this->_bullets = std::make_unique<BulletManager>(this->data);
+    this->direction.x = 0.f;
+    this->direction.y = 0.f;
+    this->shootingTimer = BULLET_SHOOTING_COOLDOWN;
+    this->_bullets = std::make_unique<BulletManager>(this->data);
+    Mix_PlayMusic(this->data->assets.getMusic(), -1);
 }
 Player::~Player()
 {
@@ -96,13 +97,14 @@ void Player::handleInput(SDL_Event e)
             //     }
             // }
             //****************************************************************************
-            // {
-            //     if (this->shootingTimer > BULLET_SHOOTING_COOLDOWN)
-            //     {
-            //         this->shootingTimer = 0.f;
-            //         this->shoot();
-            //     }
-            // }
+            {
+                if (this->shootingTimer > BULLET_SHOOTING_COOLDOWN)
+                {
+                    this->shootingTimer = 0.f;
+                    this->shoot();
+                }
+                Mix_PlayChannel(-1, this->data->assets.getChuck(), 0);
+            }
             break;
         default:
             break;
@@ -114,13 +116,13 @@ void Player::update(float deltaTime)
     this->pos.first += this->velocity.first * deltaTime;
     this->pos.second += this->velocity.second * deltaTime;
     // Update bullets
-    // this->_bullets->update(deltaTime);
-    // this->shootingTimer += deltaTime;
+    this->_bullets->update(deltaTime);
+    this->shootingTimer += deltaTime;
     // this->_bullet->move(this->coor_bullet);
-    // if (this->_bullet->getPosition().first > this->pos.first + 350 || this->_bullet->getPosition().first < this->pos.first - 350 || this->_bullet->getPosition().second > this->pos.second + 350 || this->_bullet->getPosition().second < this->pos.second - 350)
-    // {
-    //     this->_bullet->setHealth(0);
-    // }
+    //  if (this->_bullet->getPosition().first > this->pos.first + 350 || this->_bullet->getPosition().first < this->pos.first - 350 || this->_bullet->getPosition().second > this->pos.second + 350 || this->_bullet->getPosition().second < this->pos.second - 350)
+    //  {
+    //      this->_bullet->setHealth(0);
+    //  }
     this->sprite_player.setPosition(pos.first, pos.second);
     this->sprite_player.setTextureRect(this->player_clip);
     this->playerView = this->data->window.getDefaultView();
@@ -138,12 +140,34 @@ void Player::draw()
     // {
     //     this->_bullet->draw();
     // }
-    // this->_bullets->draw();
+    this->_bullets->draw();
 }
 void Player::shoot()
 {
-    // SDL_Rect t = this->getGlobalBounds();
-    // this->_bullets->spawnBullet(
-    //     t.x + t.w / 2, t.y,
-    //     Vector2f(0.f, -1.f));
+    SDL_Rect t = this->getGlobalBounds();
+
+    if (this->dir == Direction::up)
+    {
+        this->_bullets->spawnBullet(
+            t.x, t.y - 32,
+            Vector2f(0.f, -1.f));
+    }
+    else if (this->dir == Direction::down)
+    {
+        this->_bullets->spawnBullet(
+            t.x, t.y + 32,
+            Vector2f(0.f, 1.f));
+    }
+    else if (this->dir == Direction::left)
+    {
+        this->_bullets->spawnBullet(
+            t.x - 32, t.y,
+            Vector2f(-1.f, 0.f));
+    }
+    else if (this->dir == Direction::right)
+    {
+        this->_bullets->spawnBullet(
+            t.x + 32, t.y,
+            Vector2f(1.f, 0.f));
+    }
 }

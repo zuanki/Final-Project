@@ -6,7 +6,7 @@
 #include <Render/View.hpp>
 #include <Bullet.hpp>
 #include <Direction.hpp>
-//#include <BulletManager.hpp>
+#include <BulletManager.hpp>
 
 class Player
 {
@@ -14,13 +14,13 @@ private:
     Sprite sprite_player;
     SDL_Rect player_clip;
     GameDataRef data;
-    // Vector2f direction;
-    //  std::unique_ptr<BulletManager> _bullets;
+    Vector2f direction;
+    std::unique_ptr<BulletManager> _bullets;
     View playerView;
     Direction dir;
     std::pair<float, float> pos;
     std::pair<float, float> velocity;
-    // float shootingTimer;
+    float shootingTimer;
     int moveSpeed;
     int hp = 3;
 
