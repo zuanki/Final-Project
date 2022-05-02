@@ -8,7 +8,7 @@ Sprite::Sprite()
 }
 Sprite::~Sprite()
 {
-    SDL_DestroyTexture(this->texture);
+    // SDL_DestroyTexture(this->texture);
 }
 Sprite::Sprite(SDL_Texture *texture)
 {
