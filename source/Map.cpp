@@ -86,9 +86,9 @@ void Map::update(float deltaTime)
 }
 void Map::draw()
 {
-    for (int i = 0; i < this->wall.size(); i++)
+    for (int i = 0; i < this->map.size(); i++)
     {
-        wall[i]->draw();
+        map[i]->draw();
     }
     this->player->draw();
 }
