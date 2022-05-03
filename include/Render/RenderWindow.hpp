@@ -7,6 +7,7 @@
 #include <iostream>
 #include <Render/Sprite.hpp>
 #include <Render/View.hpp>
+#include <Render/Text.hpp>
 
 class RenderWindow
 {
@@ -19,6 +20,7 @@ public:
     bool pollEvent(SDL_Event *event);
     void clear();
     void draw(const Sprite &sprite);
+    void draw(Text &text);
     void display();
     void close();
     void setView(const View &view);

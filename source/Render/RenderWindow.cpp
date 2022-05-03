@@ -1,6 +1,7 @@
 #include <Render/RenderWindow.hpp>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
+
 RenderWindow::RenderWindow()
 {
     this->open = true;
@@ -86,4 +87,11 @@ View RenderWindow::getView() const
 View RenderWindow::getDefaultView() const
 {
     return View({0, 0}, this->size);
+}
+void RenderWindow::draw(Text &text)
+{
+    SDL_Rect actualRect = text.destRect;
+    actualRect.x -= 0; // this->view.position.x;
+    actualRect.y -= 0; // this->view.position.y;
+    SDL_RenderCopy(this->renderer, text.texture, NULL, &actualRect);
 }
