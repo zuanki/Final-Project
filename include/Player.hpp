@@ -22,7 +22,8 @@ private:
     std::pair<float, float> velocity;
     float shootingTimer;
     int moveSpeed;
-    int hp = 3;
+    int hp = 20;
+    Text hp_text;
 
 public:
     Player(GameDataRef data);
