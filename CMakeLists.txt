@@ -2,7 +2,24 @@ cmake_minimum_required(VERSION 3.0.0)
 project(UET2022)
 include_directories(include)
 
-set(SOURCES source/main.cpp source/Render/RenderWindow.cpp source/Render/Sprite.cpp source/Render/View.cpp source/StateMachine.cpp source/Game.cpp source/GameState.cpp source/AssetManager.cpp source/Player.cpp source/Map.cpp source/Tile.cpp source/Animation.cpp source/Enemy.cpp source/Bullet.cpp source/BulletManager.cpp source/Render/Text.cpp)
+set(SOURCES source/main.cpp
+            source/Render/RenderWindow.cpp
+            source/Render/Sprite.cpp
+            source/Render/View.cpp
+            source/StateMachine.cpp 
+            source/Game.cpp
+            source/GameState.cpp
+            source/AssetManager.cpp
+            source/Player.cpp
+            source/Map.cpp
+            source/Tile.cpp
+            source/Animation.cpp
+            source/Enemy.cpp
+            source/Bullet.cpp
+            source/BulletManager.cpp
+            source/Render/Text.cpp
+            source/MenuState.cpp
+            source/MenuFunction.cpp)
 
 
 find_package(SDL2 REQUIRED)
