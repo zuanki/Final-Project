@@ -1,10 +1,10 @@
 #include <Game.hpp>
-#include <GameState.hpp>
+#include <MenuState.hpp>
 Game::Game(int width, int height, std::string title)
 {
     this->data->window.create(title, width, height);
     this->data->assets.setRenderer(this->data->window.getRenderer());
-    this->data->machine.addState(StateRef(std::make_unique<GameState>(this->data)));
+    this->data->machine.addState(StateRef(std::make_unique<MenuState>(this->data)));
     this->run();
 }
 void Game::run()
