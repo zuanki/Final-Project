@@ -10,6 +10,7 @@ void GameState::init()
     this->data->assets.loadTexture("wall_tile", MAP_WALL_IMAGE_PATH);
     this->data->assets.loadTexture("tree_tile", MAP_TREE_IMAGE_PATH);
     this->data->assets.loadTexture("water_tile", MAP_WATER_IMAGE_PATH);
+    this->data->assets.loadTexture("gate_tile", MAP_GATE_IMAGE_PATH);
     this->data->assets.loadTexture("bullet_fire", BULLET_IMAGE_PATH);
     this->data->assets.loadTexture("mantis_enemy", MANTIS_IMAGE_PATH);
     this->data->assets.loadFont("Font24", FONT_PATH, 24);
