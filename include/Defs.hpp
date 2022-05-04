@@ -13,6 +13,7 @@
 #define MAP_WALL_IMAGE_PATH "../resource/images/BIGSQUARES.png"
 #define MAP_WATER_IMAGE_PATH "../resource/images/WATER.png"
 #define MAP_TREE_IMAGE_PATH "../resource/images/BIGLEAVES.png"
+#define MAP_GATE_IMAGE_PATH "../resource/images/HEXAGONS.png"
 
 // Bullets
 #define BULLET_IMAGE_PATH "../resource/images/fire.png"
