@@ -59,6 +59,12 @@ Map::Map(GameDataRef data) : data(data)
                 k->setPosition(32 * j, 32 * i);
                 this->wall.push_back(std::move(k));
             }
+            else if (this->map_text[i][j] == 'O')
+            {
+                this->gate = std::make_unique<Tile>(this->data);
+                this->gate->setTexture(this->data->assets.getTexture("gate_tile"));
+                this->gate->setPosition(32 * j, 32 * i);
+            }
         }
     }
     this->player = std::make_unique<Player>(this->data);
@@ -79,6 +85,7 @@ void Map::update(float deltaTime)
 {
     this->player->update(deltaTime);
     this->checkCollisionWithWall();
+    this->chechCollisionWithGate();
     // if (Collision::checkCollision(this->player->getGlobalBounds(), this->wall[0]->getGlobalBounds()))
     // {
     //     std::cout << "He he it works" << std::endl;
@@ -90,6 +97,7 @@ void Map::draw()
     {
         map[i]->draw();
     }
+    this->gate->draw();
     this->player->draw();
 }
 void Map::checkCollisionWithWall()
@@ -128,4 +136,11 @@ void Map::checkCollisionWithWall()
     //         }
     //     }
     // }
+}
+void Map::chechCollisionWithGate()
+{
+    if (Collision::checkCollision(this->player->getGlobalBounds(), this->gate->getGlobalBounds()))
+    {
+        std::cout << "Win" << std::endl;
+    }
 }

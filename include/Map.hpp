@@ -10,6 +10,7 @@ private:
     std::vector<std::unique_ptr<Tile>> map;
     std::vector<std::string> map_text;
     std::vector<std::unique_ptr<Tile>> wall;
+    std::unique_ptr<Tile> gate;
     std::unique_ptr<Player> player;
     GameDataRef data;
 
@@ -21,4 +22,5 @@ public:
     void init();
     void draw();
     void checkCollisionWithWall();
+    void chechCollisionWithGate();
 };
