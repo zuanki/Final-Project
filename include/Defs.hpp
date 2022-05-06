@@ -8,7 +8,7 @@
 
 // Map
 #define MAP_IMAGE_PATH "../resource/images/art.jpg"
-#define MAP_TXT_PATH "../resource/maptypes/0.txt"
+#define MAP_TXT_PATH "../resource/maptypes/1.txt"
 #define MAP_PATH_IMAGE_PATH "../resource/images/SNOW.png"
 #define MAP_WALL_IMAGE_PATH "../resource/images/BIGSQUARES.png"
 #define MAP_WATER_IMAGE_PATH "../resource/images/WATER.png"
