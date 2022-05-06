@@ -1,6 +1,6 @@
 #include <GameState.hpp>
 #include <Defs.hpp>
-GameState::GameState(GameDataRef data) : data(data)
+GameState::GameState(GameDataRef data, int level) : data(data), level(level)
 {
 }
 void GameState::init()
@@ -17,8 +17,7 @@ void GameState::init()
     this->data->assets.loadFont("Font40", FONT_PATH, 40);
     this->data->assets.loadMusic(MUSIC_PATH);
     this->data->assets.loadChuck(CHUCK_PATH);
-    this->map = std::make_unique<Map>(this->data);
-    this->enemy = std::make_unique<Enemy>(this->data);
+    this->map = std::make_unique<Map>(this->data, this->level);
     this->map->init();
 }
 void GameState::handleInput()
@@ -38,13 +37,11 @@ void GameState::handleInput()
 }
 void GameState::update(float deltaTime)
 {
-    this->enemy->update(deltaTime);
     this->map->update(deltaTime);
 }
-void GameState::draw() const
+void GameState::draw()
 {
     this->data->window.clear();
     this->map->draw();
-    this->enemy->draw();
     this->data->window.display();
 }
