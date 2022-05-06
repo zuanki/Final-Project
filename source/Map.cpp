@@ -2,9 +2,10 @@
 #include <Defs.hpp>
 #include <fstream>
 #include <Utility/Collison.hpp>
-Map::Map(GameDataRef data) : data(data)
+Map::Map(GameDataRef data, int level) : data(data)
 {
-    std::ifstream readmap(MAP_TXT_PATH);
+    std::string xpath = "../resource/maptypes/" + std::to_string(level) + ".txt";
+    std::ifstream readmap(xpath);
     if (readmap.is_open())
     {
         std::string x;
@@ -14,6 +15,7 @@ Map::Map(GameDataRef data) : data(data)
         }
         readmap.close();
     }
+
     for (int i = 0; i < this->map_text.size(); i++)
     {
         for (int j = 0; j < this->map_text[i].size(); j++)
@@ -67,7 +69,10 @@ Map::Map(GameDataRef data) : data(data)
             }
         }
     }
+
     this->player = std::make_unique<Player>(this->data);
+    this->enemy = std::make_unique<Enemy>(this->data);
+    std::cout << this->map_text.size() << " " << this->map_text[0].size() << std::endl;
 }
 Map::~Map()
 {
@@ -84,8 +89,12 @@ void Map::init()
 void Map::update(float deltaTime)
 {
     this->player->update(deltaTime);
-    this->checkCollisionWithWall();
-    this->chechCollisionWithGate();
+    this->enemy->update(deltaTime);
+    this->checkCollisionPlayerWithWall();
+    this->chechCollisionPlayerWithGate();
+    this->checkCollisionPlayerWithEnemy();
+    this->checkCollisionBulletWithWall();
+    this->checkCollisionBulletWithEnemy();
     // if (Collision::checkCollision(this->player->getGlobalBounds(), this->wall[0]->getGlobalBounds()))
     // {
     //     std::cout << "He he it works" << std::endl;
@@ -99,8 +108,9 @@ void Map::draw()
     }
     this->gate->draw();
     this->player->draw();
+    this->enemy->draw();
 }
-void Map::checkCollisionWithWall()
+void Map::checkCollisionPlayerWithWall()
 {
 
     for (int i = 0; i < this->wall.size(); i++)
@@ -137,10 +147,45 @@ void Map::checkCollisionWithWall()
     //     }
     // }
 }
-void Map::chechCollisionWithGate()
+void Map::chechCollisionPlayerWithGate()
 {
     if (Collision::checkCollision(this->player->getGlobalBounds(), this->gate->getGlobalBounds()))
     {
         std::cout << "Win" << std::endl;
+    }
+}
+void Map::checkCollisionPlayerWithEnemy()
+{
+    if (Collision::checkCollision(this->player->getGlobalBounds(), this->enemy->getGlobalBounds()))
+    {
+        this->enemy->setDeath(true);
+    }
+}
+void Map::checkCollisionBulletWithWall()
+{
+    for (const auto &bullet : this->player->getBullet())
+    {
+        for (const auto &wall : this->wall)
+        {
+            if (Collision::checkCollision(bullet->getGlobalBounds(), wall->getGlobalBounds()))
+            {
+                bullet->setOut();
+                break;
+            }
+        }
+    }
+}
+
+void Map::checkCollisionBulletWithEnemy()
+{
+    for (const auto &bullet : this->player->getBullet())
+    {
+
+        if (Collision::checkCollision(bullet->getGlobalBounds(), this->enemy->getGlobalBounds()))
+        {
+            bullet->setOut();
+            this->enemy->setDeath(true);
+            break;
+        }
     }
 }
