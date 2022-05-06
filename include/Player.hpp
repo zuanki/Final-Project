@@ -22,7 +22,7 @@ private:
     std::pair<float, float> velocity;
     float shootingTimer;
     int moveSpeed;
-    int hp = 20;
+    int hp = 3;
     Text hp_text;
 
 public:

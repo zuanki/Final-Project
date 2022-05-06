@@ -12,6 +12,7 @@ Player::Player(GameDataRef data) : data(data)
     this->direction.y = 0.f;
     this->shootingTimer = BULLET_SHOOTING_COOLDOWN;
     this->_bullets = std::make_unique<BulletManager>(this->data);
+    //
     Mix_PlayMusic(this->data->assets.getMusic(), -1);
     //
     this->hp_text.setRenderer(this->data->window.getRenderer());
@@ -76,32 +77,6 @@ void Player::handleInput(SDL_Event e)
             }
             break;
         case SDL_SCANCODE_SPACE:
-            // {
-            //     if (this->dir == Direction::down && this->_bullet->getHealth() == 0)
-            //     {
-            //         this->coor_bullet = std::make_pair(0, SHOOTING_SPEED);
-            //         this->_bullet->setPosition(pos.first, pos.second + 32);
-            //         this->_bullet->setHealth(1);
-            //     }
-            //     else if (this->dir == Direction::up && this->_bullet->getHealth() == 0)
-            //     {
-            //         this->coor_bullet = std::make_pair(0, -SHOOTING_SPEED);
-            //         this->_bullet->setPosition(pos.first, pos.second - 32);
-            //         this->_bullet->setHealth(1);
-            //     }
-            //     else if (this->dir == Direction::left && this->_bullet->getHealth() == 0)
-            //     {
-            //         this->coor_bullet = std::make_pair(-SHOOTING_SPEED, 0);
-            //         this->_bullet->setPosition(pos.first - 32, pos.second);
-            //         this->_bullet->setHealth(1);
-            //     }
-            //     else if (this->dir == Direction::right && this->_bullet->getHealth() == 0)
-            //     {
-            //         this->coor_bullet = std::make_pair(SHOOTING_SPEED, 0);
-            //         this->_bullet->setPosition(pos.first + 32, pos.second);
-            //         this->_bullet->setHealth(1);
-            //     }
-            // }
             //****************************************************************************
             {
                 if (this->shootingTimer > BULLET_SHOOTING_COOLDOWN)
@@ -110,8 +85,7 @@ void Player::handleInput(SDL_Event e)
                     this->shoot();
                 }
                 //
-                this->takeHit();
-                this->hp_text.setString(std::to_string(this->hp));
+                // this->hp_text.setString(std::to_string(this->hp));
                 //
                 Mix_PlayChannel(-1, this->data->assets.getChuck(), 0);
             }
@@ -128,15 +102,13 @@ void Player::update(float deltaTime)
     // Update bullets
     this->_bullets->update(deltaTime);
     this->shootingTimer += deltaTime;
-    // this->_bullet->move(this->coor_bullet);
-    //  if (this->_bullet->getPosition().first > this->pos.first + 350 || this->_bullet->getPosition().first < this->pos.first - 350 || this->_bullet->getPosition().second > this->pos.second + 350 || this->_bullet->getPosition().second < this->pos.second - 350)
-    //  {
-    //      this->_bullet->setHealth(0);
-    //  }
+
     this->sprite_player.setPosition(pos.first, pos.second);
     this->sprite_player.setTextureRect(this->player_clip);
+
     this->playerView = this->data->window.getDefaultView();
     this->playerView.setCenter(this->sprite_player.getPosition());
+
     this->data->window.setView(this->playerView);
 }
 void Player::setPosition(int u, int v)
@@ -146,10 +118,7 @@ void Player::setPosition(int u, int v)
 void Player::draw()
 {
     this->data->window.draw(this->sprite_player);
-    // if (this->_bullet->getHealth() == 1)
-    // {
-    //     this->_bullet->draw();
-    // }
+
     this->_bullets->draw();
     //
     this->data->window.draw(this->hp_text);
