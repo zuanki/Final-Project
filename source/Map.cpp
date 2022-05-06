@@ -2,6 +2,7 @@
 #include <Defs.hpp>
 #include <fstream>
 #include <Utility/Collison.hpp>
+#include <WinState.hpp>
 Map::Map(GameDataRef data, int level) : data(data)
 {
     std::string xpath = "../resource/maptypes/" + std::to_string(level) + ".txt";
@@ -72,7 +73,6 @@ Map::Map(GameDataRef data, int level) : data(data)
 
     this->player = std::make_unique<Player>(this->data);
     this->enemy = std::make_unique<Enemy>(this->data);
-    std::cout << this->map_text.size() << " " << this->map_text[0].size() << std::endl;
 }
 Map::~Map()
 {
@@ -95,10 +95,6 @@ void Map::update(float deltaTime)
     this->checkCollisionPlayerWithEnemy();
     this->checkCollisionBulletWithWall();
     this->checkCollisionBulletWithEnemy();
-    // if (Collision::checkCollision(this->player->getGlobalBounds(), this->wall[0]->getGlobalBounds()))
-    // {
-    //     std::cout << "He he it works" << std::endl;
-    // }
 }
 void Map::draw()
 {
@@ -151,14 +147,14 @@ void Map::chechCollisionPlayerWithGate()
 {
     if (Collision::checkCollision(this->player->getGlobalBounds(), this->gate->getGlobalBounds()))
     {
-        std::cout << "Win" << std::endl;
+        this->data->machine.addState(StateRef(std::make_unique<WinState>(this->data)));
     }
 }
 void Map::checkCollisionPlayerWithEnemy()
 {
     if (Collision::checkCollision(this->player->getGlobalBounds(), this->enemy->getGlobalBounds()))
     {
-        this->enemy->setDeath(true);
+        this->player->takeHit();
     }
 }
 void Map::checkCollisionBulletWithWall()
@@ -184,7 +180,11 @@ void Map::checkCollisionBulletWithEnemy()
         if (Collision::checkCollision(bullet->getGlobalBounds(), this->enemy->getGlobalBounds()))
         {
             bullet->setOut();
-            this->enemy->setDeath(true);
+            this->enemy->takeHit();
+            if (this->enemy->getHp() == 0)
+            {
+                this->enemy->setDeath(true);
+            }
             break;
         }
     }
