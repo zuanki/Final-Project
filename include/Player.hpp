@@ -54,4 +54,8 @@ public:
     {
         return dir;
     }
+    std::vector<BulletRef> &getBullet()
+    {
+        return this->_bullets->list();
+    }
 };
