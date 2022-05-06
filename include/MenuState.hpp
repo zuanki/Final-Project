@@ -15,4 +15,7 @@ public:
 private:
     GameDataRef data;
     Text newgame;
+    Text easy;
+    Text hard;
+    Sprite menu_background;
 };
