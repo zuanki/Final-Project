@@ -9,6 +9,7 @@ private:
     GameDataRef data;
     std::unique_ptr<Animation> animation;
     bool isDeath;
+    int hp = 10;
 
 public:
     Enemy(GameDataRef data);
@@ -20,6 +21,14 @@ public:
     }
     void update(float deltaTime);
     void draw();
+    void takeHit()
+    {
+        this->hp--;
+    }
+    int getHp()
+    {
+        return this->hp;
+    }
     SDL_Rect getGlobalBounds()
     {
         return this->sprite.getGlobalBounds();
