@@ -1,5 +1,6 @@
 #include <Game.hpp>
 #include <MenuState.hpp>
+
 Game::Game(int width, int height, std::string title)
 {
     this->data->window.create(title, width, height);
