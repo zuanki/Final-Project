@@ -8,12 +8,20 @@ private:
     Sprite sprite;
     GameDataRef data;
     std::unique_ptr<Animation> animation;
-    int k = 1;
+    bool isDeath;
 
 public:
     Enemy(GameDataRef data);
     ~Enemy();
     void moveRandom();
+    void setDeath(bool x)
+    {
+        isDeath = x;
+    }
     void update(float deltaTime);
     void draw();
+    SDL_Rect getGlobalBounds()
+    {
+        return this->sprite.getGlobalBounds();
+    }
 };
