@@ -6,7 +6,11 @@ MenuState::MenuState(GameDataRef data) : data(data)
 {
     this->data->assets.loadFont("Font24", FONT_PATH, 24);
     this->data->assets.loadFont("Font40", FONT_PATH, 40);
-    this->mf = std::make_unique<MenuFunction>(this->data);
+    this->newgame.setRenderer(this->data->window.getRenderer());
+    this->newgame.setFont(this->data->assets.getFont("Font40"));
+    this->newgame.setColor({255, 0, 0, 0});
+    this->newgame.setString("Hello");
+    this->newgame.setPosition(100, 100);
 }
 MenuState::~MenuState()
 {
@@ -28,8 +32,14 @@ void MenuState::handleInput()
         {
             switch (e.key.keysym.scancode)
             {
-            case SDL_SCANCODE_SPACE:
-                this->data->machine.addState(StateRef(std::make_unique<GameState>(this->data)));
+            case SDL_SCANCODE_0:
+                this->data->machine.addState(StateRef(std::make_unique<GameState>(this->data, 0)));
+                break;
+            case SDL_SCANCODE_1:
+                this->data->machine.addState(StateRef(std::make_unique<GameState>(this->data, 1)));
+                break;
+            case SDL_SCANCODE_2:
+                this->data->machine.addState(StateRef(std::make_unique<GameState>(this->data, 2)));
                 break;
             default:
                 break;
@@ -41,8 +51,9 @@ void MenuState::update(float deltaTime)
 {
     //
 }
-void MenuState::draw() const
+void MenuState::draw()
 {
-    // this->data->window.draw(this->newgame);
-    this->mf->draw();
+    this->data->window.clear();
+    this->data->window.draw(this->newgame);
+    this->data->window.display();
 }
