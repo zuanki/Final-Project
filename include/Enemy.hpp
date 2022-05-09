@@ -4,7 +4,9 @@
 
 class Enemy
 {
-private:
+    friend class EnemyManager;
+
+protected:
     Sprite sprite;
     GameDataRef data;
     std::unique_ptr<Animation> animation;
@@ -18,6 +20,14 @@ public:
     void setDeath(bool x)
     {
         isDeath = x;
+    }
+    void setPosition(float x, float y)
+    {
+        this->sprite.setPosition(x, y);
+    }
+    void setTexture(SDL_Texture *texture)
+    {
+        this->sprite.setTexture(texture);
     }
     void update(float deltaTime);
     void draw();
