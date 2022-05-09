@@ -18,8 +18,8 @@ private:
     std::unique_ptr<BulletManager> _bullets;
     View playerView;
     Direction dir;
-    std::pair<float, float> pos;
-    std::pair<float, float> velocity;
+    Vector2f pos;
+    Vector2f velocity;
     float shootingTimer;
     int moveSpeed;
     int hp = 3;
@@ -34,7 +34,7 @@ public:
     void setPosition(int u, int v);
     void setVelocity(float u, float v)
     {
-        velocity = std::make_pair(u, v);
+        velocity = Vector2f(u, v);
     }
     SDL_Rect getGlobalBounds()
     {

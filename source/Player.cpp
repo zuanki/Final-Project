@@ -6,7 +6,7 @@ Player::Player(GameDataRef data) : data(data)
     this->sprite_player.setTexture(this->data->assets.getTexture("player"));
     this->player_clip = {0, 0, 32, 48};
     this->sprite_player.setTextureRect(this->player_clip);
-    this->pos = std::make_pair(32, 32);
+    this->pos = Vector2f(32 * 10, 32 * 8);
     this->dir = Direction::down;
     this->direction.x = 0.f;
     this->direction.y = 0.f;
@@ -16,7 +16,7 @@ Player::Player(GameDataRef data) : data(data)
     Mix_PlayMusic(this->data->assets.getMusic(), -1);
     //
     this->hp_text.setRenderer(this->data->window.getRenderer());
-    this->hp_text.setFont(this->data->assets.getFont("Font24"));
+    this->hp_text.setFont(this->data->assets.getFont("Font16"));
     this->hp_text.setColor({255, 0, 0, 0});
     this->hp_text.setString(std::to_string(this->hp));
     this->hp_text.setPosition(0, 0);
@@ -26,16 +26,16 @@ Player::~Player()
 }
 void Player::handleInput(SDL_Event e)
 {
-    this->velocity.first = 0;
-    this->velocity.second = 0;
+    this->velocity.x = 0;
+    this->velocity.y = 0;
     if (e.type == SDL_KEYDOWN)
     {
         switch (e.key.keysym.scancode)
         {
         case SDL_SCANCODE_UP:
             this->dir = Direction::up;
-            this->velocity.second = -this->moveSpeed;
-            this->velocity.first = 0;
+            this->velocity.y = -this->moveSpeed;
+            this->velocity.x = 0;
             this->player_clip.y = 48 * 3;
             this->player_clip.x += 32;
             if (this->player_clip.x >= 32 * 4)
@@ -45,8 +45,8 @@ void Player::handleInput(SDL_Event e)
             break;
         case SDL_SCANCODE_DOWN:
             this->dir = Direction::down;
-            this->velocity.second = this->moveSpeed;
-            this->velocity.first = 0;
+            this->velocity.y = this->moveSpeed;
+            this->velocity.x = 0;
             this->player_clip.y = 48 * 0;
             this->player_clip.x += 32;
             if (this->player_clip.x >= 32 * 4)
@@ -56,8 +56,8 @@ void Player::handleInput(SDL_Event e)
             break;
         case SDL_SCANCODE_LEFT:
             this->dir = Direction::left;
-            this->velocity.first = -this->moveSpeed;
-            this->velocity.second = 0;
+            this->velocity.x = -this->moveSpeed;
+            this->velocity.y = 0;
             this->player_clip.y = 48 * 1;
             this->player_clip.x += 32;
             if (this->player_clip.x >= 32 * 4)
@@ -67,8 +67,8 @@ void Player::handleInput(SDL_Event e)
             break;
         case SDL_SCANCODE_RIGHT:
             this->dir = Direction::right;
-            this->velocity.first = this->moveSpeed;
-            this->velocity.second = 0;
+            this->velocity.x = this->moveSpeed;
+            this->velocity.y = 0;
             this->player_clip.y = 48 * 2;
             this->player_clip.x += 32;
             if (this->player_clip.x >= 32 * 4)
@@ -97,13 +97,13 @@ void Player::handleInput(SDL_Event e)
 }
 void Player::update(float deltaTime)
 {
-    this->pos.first += this->velocity.first * deltaTime;
-    this->pos.second += this->velocity.second * deltaTime;
+    this->pos.x += this->velocity.x * deltaTime;
+    this->pos.y += this->velocity.y * deltaTime;
     // Update bullets
     this->_bullets->update(deltaTime);
     this->shootingTimer += deltaTime;
 
-    this->sprite_player.setPosition(pos.first, pos.second);
+    this->sprite_player.setPosition(pos.x, pos.y);
     this->sprite_player.setTextureRect(this->player_clip);
 
     this->playerView = this->data->window.getDefaultView();
@@ -121,7 +121,7 @@ void Player::draw()
 
     this->_bullets->draw();
     //
-    this->data->window.draw(this->hp_text);
+    // this->data->window.draw(this->hp_text);
 }
 void Player::shoot()
 {
