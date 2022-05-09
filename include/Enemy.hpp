@@ -11,7 +11,7 @@ protected:
     GameDataRef data;
     std::unique_ptr<Animation> animation;
     bool isDeath;
-    int hp = 10;
+    int hp = 4;
 
 public:
     Enemy(GameDataRef data);
