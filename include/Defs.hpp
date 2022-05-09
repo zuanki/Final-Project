@@ -7,11 +7,13 @@
 #define PLAYER_IMAGE_PATH "../resource/images/hero.png"
 
 // Map
-#define MAP_PATH_IMAGE_PATH "../resource/images/path.png"   //#
-#define MAP_WALL_IMAGE_PATH "../resource/images/wall.png"   //@
-#define MAP_WATER_IMAGE_PATH "../resource/images/WATER.png" //$
-#define MAP_TREE_IMAGE_PATH "../resource/images/fire.png"   //!
-#define MAP_GATE_IMAGE_PATH "../resource/images/gate.png"   // O
+#define MAP_PATH_IMAGE_PATH "../resource/images/path.png"     //#
+#define MAP_WALL_IMAGE_PATH "../resource/images/wall.png"     //@
+#define MAP_WATER_IMAGE_PATH "../resource/images/WATER.png"   //$
+#define MAP_TREE_IMAGE_PATH "../resource/images/fire.png"     //!
+#define MAP_GATE_IMAGE_PATH "../resource/images/gate.png"     // O
+#define MAP_FLOWER_IMAGE_PATH "../resource/images/flower.png" // *
+#define MAP_LOTUS_IMAGE_PATH "../resource/images/lotus.png"   // &
 #define BACKGROUND_IMAGE_PATH "../resource/images/menuimage.png"
 
 // Bullets
