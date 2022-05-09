@@ -5,23 +5,23 @@
 MenuState::MenuState(GameDataRef data) : data(data)
 {
     this->data->assets.loadTexture("menu_background", BACKGROUND_IMAGE_PATH);
-    this->data->assets.loadFont("Font35", FONT_PATH, 35);
-    this->data->assets.loadFont("Font40", FONT_PATH, 40);
+    this->data->assets.loadFont("Font16", FONT_PATH, 16);
+    this->data->assets.loadFont("Font20", FONT_PATH, 20);
 
     this->newgame.setRenderer(this->data->window.getRenderer());
-    this->newgame.setFont(this->data->assets.getFont("Font40"));
+    this->newgame.setFont(this->data->assets.getFont("Font20"));
     this->newgame.setColor({3, 252, 177, 0});
     this->newgame.setString("PRESS ESC TO ESCAPE !!!");
     this->newgame.setPosition(150, 50);
 
     this->easy.setRenderer(this->data->window.getRenderer());
-    this->easy.setFont(this->data->assets.getFont("Font35"));
+    this->easy.setFont(this->data->assets.getFont("Font16"));
     this->easy.setColor({3, 252, 177, 0});
     this->easy.setString("KEY 1 : EASY");
     this->easy.setPosition(250, 200);
 
     this->hard.setRenderer(this->data->window.getRenderer());
-    this->hard.setFont(this->data->assets.getFont("Font35"));
+    this->hard.setFont(this->data->assets.getFont("Font16"));
     this->hard.setColor({3, 252, 177, 0});
     this->hard.setString("KEY 2 : HARD");
     this->hard.setPosition(250, 250);
