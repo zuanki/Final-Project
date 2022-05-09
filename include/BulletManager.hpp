@@ -11,13 +11,9 @@ class BulletManager
 {
 public:
     BulletManager(GameDataRef data);
-
     void update(float deltaTime);
-
     void draw() const;
-
     void spawnBullet(float x, float y, const Vector2f &direction);
-
     std::vector<BulletRef> &list();
 
 private:
