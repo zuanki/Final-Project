@@ -17,6 +17,7 @@ void Game::run()
         curTime = SDL_GetTicks() / 1000.f;
         deltaTime = curTime - lastTime;
         lastTime = curTime;
+        // std::cout << deltaTime << std::endl;
         this->data->machine.processStateChanges();
         this->data->machine.getActiveState()->handleInput();
         this->data->machine.getActiveState()->update(deltaTime);
