@@ -5,20 +5,20 @@
 WinState::WinState(GameDataRef data) : data(data)
 {
     this->data->assets.loadTexture("menu_background", BACKGROUND_IMAGE_PATH);
-    this->data->assets.loadFont("Font35", FONT_PATH, 35);
-    this->data->assets.loadFont("Font40", FONT_PATH, 40);
+    this->data->assets.loadFont("Font16", FONT_PATH, 16);
+    this->data->assets.loadFont("Font20", FONT_PATH, 20);
 
     this->wingame.setRenderer(this->data->window.getRenderer());
-    this->wingame.setFont(this->data->assets.getFont("Font40"));
+    this->wingame.setFont(this->data->assets.getFont("Font20"));
     this->wingame.setColor({3, 252, 177, 0});
-    this->wingame.setString("YEAH YOU ARE WINNER !!!");
-    this->wingame.setPosition(150, 100);
+    this->wingame.setString("VICTORY !!!");
+    this->wingame.setPosition(250, 100);
 
     this->play_again.setRenderer(this->data->window.getRenderer());
-    this->play_again.setFont(this->data->assets.getFont("Font35"));
+    this->play_again.setFont(this->data->assets.getFont("Font16"));
     this->play_again.setColor({3, 252, 177, 0});
     this->play_again.setString("BACK TO MENU ? [Y] or [N]");
-    this->play_again.setPosition(150, 250);
+    this->play_again.setPosition(200, 250);
 
     this->menu_background.setTexture(this->data->assets.getTexture("menu_background"));
     this->menu_background.setTextureRect({0, 0, 640, 480});
