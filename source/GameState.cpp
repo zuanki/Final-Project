@@ -13,8 +13,9 @@ void GameState::init()
     this->data->assets.loadTexture("gate_tile", MAP_GATE_IMAGE_PATH);
     this->data->assets.loadTexture("bullet_fire", BULLET_IMAGE_PATH);
     this->data->assets.loadTexture("mantis_enemy", MANTIS_IMAGE_PATH);
-    this->data->assets.loadFont("Font24", FONT_PATH, 24);
-    this->data->assets.loadFont("Font40", FONT_PATH, 40);
+    this->data->assets.loadTexture("beetle_enemy", BEETLE_IMAGE_PATH);
+    this->data->assets.loadFont("Font16", FONT_PATH, 16);
+    this->data->assets.loadFont("Font20", FONT_PATH, 20);
     this->data->assets.loadMusic(MUSIC_PATH);
     this->data->assets.loadChuck(CHUCK_PATH);
     this->map = std::make_unique<Map>(this->data, this->level);
