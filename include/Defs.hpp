@@ -21,11 +21,12 @@
 
 // Enemies
 #define MANTIS_IMAGE_PATH "../resource/images/Enemies/MantisAttack.png"
+#define BEETLE_IMAGE_PATH "../resource/images/Enemies/BeetleAttack.png"
 #define ENEMY_NUM_FRAMES 7
 #define ENEMY_FRAMES_TIME 1.f / 12.f
 
 // Fonts
-#define FONT_PATH "../resource/fonts/EnterCommand.ttf"
+#define FONT_PATH "../resource/fonts/NewFont.ttf"
 
 // Audios
 #define MUSIC_PATH "../resource/audios/music.wav"
