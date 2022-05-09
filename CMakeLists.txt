@@ -19,7 +19,8 @@ set(SOURCES source/main.cpp
             source/BulletManager.cpp
             source/Render/Text.cpp
             source/MenuState.cpp
-            source/WinState.cpp)
+            source/WinState.cpp
+            source/EnemyManager.cpp)
 
 
 find_package(SDL2 REQUIRED)
