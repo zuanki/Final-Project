@@ -14,6 +14,8 @@ void GameState::init()
     this->data->assets.loadTexture("bullet_fire", BULLET_IMAGE_PATH);
     this->data->assets.loadTexture("mantis_enemy", MANTIS_IMAGE_PATH);
     this->data->assets.loadTexture("beetle_enemy", BEETLE_IMAGE_PATH);
+    this->data->assets.loadTexture("flower_tile", MAP_FLOWER_IMAGE_PATH);
+    this->data->assets.loadTexture("lotus_tile", MAP_LOTUS_IMAGE_PATH);
     this->data->assets.loadFont("Font16", FONT_PATH, 16);
     this->data->assets.loadFont("Font20", FONT_PATH, 20);
     this->data->assets.loadMusic(MUSIC_PATH);
