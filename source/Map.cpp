@@ -72,7 +72,8 @@ Map::Map(GameDataRef data, int level) : data(data)
     }
 
     this->player = std::make_unique<Player>(this->data);
-    this->enemy = std::make_unique<Enemy>(this->data);
+    // this->enemy = std::make_unique<Enemy>(this->data);
+    this->Enemies = std::make_unique<EnemyManager>(this->data, level);
 }
 Map::~Map()
 {
@@ -89,7 +90,8 @@ void Map::init()
 void Map::update(float deltaTime)
 {
     this->player->update(deltaTime);
-    this->enemy->update(deltaTime);
+    // this->enemy->update(deltaTime);
+    this->Enemies->update(deltaTime);
     this->checkCollisionPlayerWithWall();
     this->chechCollisionPlayerWithGate();
     this->checkCollisionPlayerWithEnemy();
@@ -104,7 +106,8 @@ void Map::draw()
     }
     this->gate->draw();
     this->player->draw();
-    this->enemy->draw();
+    // this->enemy->draw();
+    this->Enemies->draw();
 }
 void Map::checkCollisionPlayerWithWall()
 {
@@ -150,13 +153,13 @@ void Map::chechCollisionPlayerWithGate()
         this->data->machine.addState(StateRef(std::make_unique<WinState>(this->data)));
     }
 }
-void Map::checkCollisionPlayerWithEnemy()
-{
-    if (Collision::checkCollision(this->player->getGlobalBounds(), this->enemy->getGlobalBounds()))
-    {
-        this->player->takeHit();
-    }
-}
+// void Map::checkCollisionPlayerWithEnemy()
+// {
+//     if (Collision::checkCollision(this->player->getGlobalBounds(), this->enemy->getGlobalBounds()))
+//     {
+//         this->player->takeHit();
+//     }
+// }
 void Map::checkCollisionBulletWithWall()
 {
     for (const auto &bullet : this->player->getBullet())
@@ -172,20 +175,49 @@ void Map::checkCollisionBulletWithWall()
     }
 }
 
+// void Map::checkCollisionBulletWithEnemy()
+// {
+//     for (const auto &bullet : this->player->getBullet())
+//     {
+
+//         if (Collision::checkCollision(bullet->getGlobalBounds(), this->enemy->getGlobalBounds()))
+//         {
+//             bullet->setOut();
+//             this->enemy->takeHit();
+//             if (this->enemy->getHp() == 0)
+//             {
+//                 this->enemy->setDeath(true);
+//             }
+//             break;
+//         }
+//     }
+// }
+void Map::checkCollisionPlayerWithEnemy()
+{
+    for (const auto &enemy : this->Enemies->list())
+    {
+        if (Collision::checkCollision(enemy->getGlobalBounds(), this->player->getGlobalBounds()))
+        {
+            std::cout << "Player targeted enemy" << std::endl;
+        }
+    }
+}
 void Map::checkCollisionBulletWithEnemy()
 {
     for (const auto &bullet : this->player->getBullet())
     {
-
-        if (Collision::checkCollision(bullet->getGlobalBounds(), this->enemy->getGlobalBounds()))
+        for (const auto &enemy : this->Enemies->list())
         {
-            bullet->setOut();
-            this->enemy->takeHit();
-            if (this->enemy->getHp() == 0)
+            if (Collision::checkCollision(bullet->getGlobalBounds(), enemy->getGlobalBounds()))
             {
-                this->enemy->setDeath(true);
+                bullet->setOut();
+                enemy->takeHit();
+                if (enemy->getHp() == 0)
+                {
+                    enemy->setDeath(true);
+                }
+                break;
             }
-            break;
         }
     }
 }

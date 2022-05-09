@@ -3,7 +3,8 @@
 #include <Tile.hpp>
 #include <vector>
 #include <Player.hpp>
-#include <Enemy.hpp>
+//#include <Enemy.hpp>
+#include <EnemyManager.hpp>
 
 class Map
 {
@@ -13,7 +14,8 @@ private:
     std::vector<std::unique_ptr<Tile>> wall;
     std::unique_ptr<Tile> gate;
     std::unique_ptr<Player> player;
-    std::unique_ptr<Enemy> enemy;
+    std::unique_ptr<EnemyManager> Enemies;
+    // std::unique_ptr<Enemy> enemy;
     GameDataRef data;
 
 public:
