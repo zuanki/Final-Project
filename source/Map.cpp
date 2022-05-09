@@ -49,6 +49,20 @@ Map::Map(GameDataRef data, int level) : data(data)
                 k->setPosition(32 * j, 32 * i);
                 this->map.push_back(std::move(k));
             }
+            else if (this->map_text[i][j] == '*')
+            {
+                auto k = std::make_unique<Tile>(this->data);
+                k->setTexture(this->data->assets.getTexture("flower_tile"));
+                k->setPosition(32 * j, 32 * i);
+                this->map.push_back(std::move(k));
+            }
+            else if (this->map_text[i][j] == '&')
+            {
+                auto k = std::make_unique<Tile>(this->data);
+                k->setTexture(this->data->assets.getTexture("lotus_tile"));
+                k->setPosition(32 * j, 32 * i);
+                this->map.push_back(std::move(k));
+            }
         }
     }
     for (int i = 0; i < this->map_text.size(); i++)
