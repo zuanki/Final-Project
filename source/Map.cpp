@@ -3,6 +3,7 @@
 #include <fstream>
 #include <Utility/Collison.hpp>
 #include <WinState.hpp>
+#include <GameOverState.hpp>
 Map::Map(GameDataRef data, int level) : data(data)
 {
     std::string xpath = "../resource/maptypes/" + std::to_string(level) + ".txt";
@@ -212,7 +213,7 @@ void Map::checkCollisionPlayerWithEnemy()
     {
         if (Collision::checkCollision(enemy->getGlobalBounds(), this->player->getGlobalBounds()))
         {
-            std::cout << "Player targeted enemy" << std::endl;
+            this->data->machine.addState(StateRef(std::make_unique<GameOverState>(this->data)));
         }
     }
 }
