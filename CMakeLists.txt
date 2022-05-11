@@ -20,7 +20,8 @@ set(SOURCES source/main.cpp
             source/Render/Text.cpp
             source/MenuState.cpp
             source/WinState.cpp
-            source/EnemyManager.cpp)
+            source/EnemyManager.cpp
+            source/GameOverState.cpp)
 
 
 find_package(SDL2 REQUIRED)
